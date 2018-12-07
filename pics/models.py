@@ -20,7 +20,7 @@ class Location(models.Model):
 class Category(models.Model):
 
     '''
-    Photo category model
+    Pics category model
     '''
     
     name = models.CharField(max_length=120)
@@ -40,7 +40,7 @@ class Image(models.Model):
     Images model
     '''
     
-    image = models.ImageField(upload_to='photos/')
+    image = models.ImageField(upload_to='mediia/')
     
     image_name = models.CharField(max_length=30, blank=False)
     description = models.TextField(max_length=100, blank=False)
