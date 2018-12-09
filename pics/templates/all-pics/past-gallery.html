@@ -1,0 +1,6 @@
+{% extends 'all-pics/base.html'%}
+
+{% block content %}
+{{block.super}}
+<h1 class='text-center'>{photos for }{{date|date:"l d-F Y"}}</h1> 
+{% endblock %}
