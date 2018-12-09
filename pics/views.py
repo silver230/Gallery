@@ -35,3 +35,18 @@ def past_days_pics(request,past_date):
         return redirect(news_today)
 
     return render(request, 'all-pics/past-gallery.html',{"date": date})
+
+def search_results(request):
+
+    if 'image' in request.GET and request.GET["image"]:
+        search_term = request.GET.get(" image")
+        searched_images =  image.search_by_title(search_term)
+        message = f"{search_term}"
+
+        return render(request, 'all-pics/search.html',{"message":message," images": searched_images})
+
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'all-pics/search.html',{"message":message})    
+
+
