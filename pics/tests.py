@@ -9,19 +9,19 @@ class LocationTestClass(TestCase):
     
     # Set up method
     def setUp(self):
-        self.lewis= Location(location = 'London')
+        self.sylvester= Location(location = 'London')
 
     def test_instance(self):
-        self.assertTrue(isinstance(self.lewis,Location))
+        self.assertTrue(isinstance(self.sylvester,Location))
 
     def test_save_method(self):
-        self.lewis.save()
+        self.sylvester.save()
         locations = Location.objects.all()
         self.assertTrue(len(locations) > 0)
 
     def test_delete_method(self):
-        self.lewis.save()
-        self.lewis.delete()
+        self.sylvester.save()
+        self.sylvester.delete()
         locations = Location.objects.all()
         self.assertTrue(len(locations) == 0)
 
@@ -41,15 +41,15 @@ class CategoryTestClass(TestCase):
 class ImageTestClass(TestCase):
 
     def setUp(self):
-        lewis= Location(location = 'London')
-        lewis.save()
-        self.image= Image(image = 'lewis', image_name = 'image name', description = 'description', location = lewis)
+        sylvester= Location(location = 'London')
+        sylvester.save()
+        self.image= Image(image = 'sylvester', image_name = 'image name', description = 'description', location = sylvester)
         
         # Creating a new tag and saving it image
         self.new_category = Category(name = 'testing')
         self.new_category.save()
 
-        self.new_image= Image(image = 'Test Image',image_name = 'This is a random test Post', description = 'description',location = lewis)
+        self.new_image= Image(image = 'Test Image',image_name = 'This is a random test Post', description = 'description',location = sylvester)
         self.new_image.save()
 
     def test_instance(self):

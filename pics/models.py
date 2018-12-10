@@ -40,7 +40,7 @@ class Image(models.Model):
     Images model
     '''
     
-    image = models.ImageField(upload_to='mediia/')
+    image = models.ImageField(upload_to='media/')
     
     image_name = models.CharField(max_length=30, blank=False)
     description = models.TextField(max_length=100, blank=False)
@@ -55,23 +55,23 @@ class Image(models.Model):
     class Meta:
         ordering = ['-pub_date_posted']
 
-    # def save_image(self):
-    #     self.save()
+    def save_image(self):
+        self.save()
 
-    # def delete_image(self):
-    #     self.delete()
+    def delete_image(self):
+        self.delete()
     
-    # @classmethod
-    # def get_all(cls):
-    #     images = cls.objects.all()
-    #     return images
+    @classmethod
+    def get_all(cls):
+        images = cls.objects.all()
+        return images
 
-    # @classmethod
-    # def filter_category(cls,query):
-    #     images = cls.objects.filter(category__name=query)
-    #     return images
+    @classmethod
+    def filter_category(cls,query):
+        images = cls.objects.filter(category__name=query)
+        return images
 
-    # @classmethod
-    # def search_by_category(cls, search_term):
-    #     images = cls.objects.filter(category__name__icontains = search_term).order_by('-pub_date_posted')
-    #     return images
+    @classmethod
+    def search_by_category(cls, search_term):
+        images = cls.objects.filter(category__name__icontains = search_term).order_by('-pub_date_posted')
+        return images
