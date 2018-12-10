@@ -28,8 +28,8 @@ class Category(models.Model):
     def __str__(self):
        return self.name
     
-    # def save_category(self):
-    #     self.save()
+    def save_category(self):
+        self.save()
 
     # def delete_category(self):
     #     self.delete()
