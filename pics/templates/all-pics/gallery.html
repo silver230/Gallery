@@ -1,43 +1,46 @@
 {%extends 'all-pics/base.html'%}
-{%load bootstrap3%}
+{%load bootstrap4%}
 {% block content %}
-<div class="container">
+<div class="container-fluid">
 
-  <h1 class='text-center'>{photos for }{{date|date:"l d-F Y"}}</h1>
-  <div class="well well-sm">
-    <div class="row">
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+  <h1 class='text-center' style="color: white;background-color: black;">{photos for }{{date|date:"l d-F Y"}}</h1>
         {% for photo in photos %}
 
-        <a class="img-thumbnail" href="{{photo.image}}" data-image-id="{{photo.id}}" data-toggle="modal" data-target="#{{photo.id}}" style=height:150px>
-                <img src="{{ photo.image.url }}" alt="Image" id="img{{photo.id}}" class="img-responsive" alt="image">
-            </a>
-        <div style="text-align:left;padding-right: 200px;">
-          <div class="row">
-            <div class="col-md-6 col-sm-6">
-              <h2>{{ photo.image_name }}</h2>
-            </div>
-            <div class="col-md-6 col-sm-6">
-              <p>Posted {{photo.pub_date_posted|timesince}} ago</p>
-            </div>
-          </div>
+        <!-- Button trigger modal -->
+<button type="button" data-toggle="modal" data-target="#exampleModalCenter">
+    <a class="img-thumbnail" href="{{photo.image}}" data-image-id="{{photo.id}}" data-toggle="modal" data-target="#{{photo.id}}">
+    <img src="{{ photo.image.url }}" alt="Image" id="img{{photo.id}}" class="img-fluid" alt="image" style="width:400px;height:450px;padding:10px">
+   </a>
+  <h5 class="modal-title" id="exampleModalLongTitle">{{ photo.image_name }}</h5>
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="{{photo.id}}" tabindex="-1" role="dialog" aria-labelledby="{{photo.id}}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">{{ photo.image_name }}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <div class="modal-body">
+            <img src="{{ photo.image.url }}" alt="Image" id="img{{photo.id}}" class="img-fluid" alt="image">
+          <p>Posted {{photo.pub_date_posted|timesince}} ago</p>
           <p>description : {{ photo.description }}</p>
           <p>Location : {{ photo.location }}</p>
-          <div class="row">
-            <div class="col-md-2">
-              <button type="button" class="btn btn-default btn-sm">Close</button>
-            </div>
-            <div class="col-md-10">
-              <a onclick="copyLink ({{photo.id}})"><button type="button" class="btn btn-success btn-sm">Copy Link</a>
-              <input class="form-control" type="text" value="https://silverstargallery{{photo.image.url}}" id="thislinkhere-{{photo.id}}">
-
-    </div>
-            </div>
-          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          
+          <a onclick="copyLink ({{photo.id}})"><button type="button" class="btn btn-success btn-sm">Copy Link</a>
+            <input class="form-control" type="text" value="https://silverstargallery{{photo.image.url}}" id="thislinkhere-{{photo.id}}">
+  
         </div>
       </div>
+    </div>
+  </div>
+         
       {% endfor %}
     </div>
 
@@ -56,3 +59,4 @@
     }
   </script>
   {% endblock %}
+ 

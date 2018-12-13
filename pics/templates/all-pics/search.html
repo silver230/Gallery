@@ -5,27 +5,27 @@
 
   <div class="row">
     {% if images%}
-      <h2 style="color:azure; font-family: 'Oregano', cursive; font-size: 35px;">Found {{ images|length }} of searched term {{message}}</h2>
-      
+    <h2 style="color:turquoise;font:status-bar;">Found {{ images|length }} of searched term {{message}}</h2>
+
     {% else %}
-      <h2 style="color:azure; font-family: 'Oregano', cursive; font-size: 35px;"> Found 0 images for the search term {{message}}</h2>
+    <h2 style="color:turquoise;font:status-bar;font-size:70px;font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;"> Found 0 images for the search term {{message}}</h2>
     {% endif %}
 
   </div>
 
   <div class="row">
 
-  {% if images %}
+    {% if images %}
     {% for images_item in images %}
-      <div class="col-sm-4">
-          
-          <a class="img-thumbnail" href="{{images_item.image.url}}" data-image-id="{{images_item.id}}" data-toggle="modal" data-target="#{{images_item.id}}">
+    <div class="col-sm-4">
+
+      <a class="img-thumbnail" href="{{images_item.image.url}}" data-image-id="{{images_item.id}}" data-toggle="modal" data-target="#{{images_item.id}}">
                 <img src="{{images_item.image.url}}" alt="Image" id="img{{images_item.id}}" class="img-responsive" alt="image" style="height:400px; width: 400px;">
             </a>
-          <!-- <img src="{{images_item.image.url}}" alt=""> -->
+      <img src="{{images_item.image.url}}" alt="">
       </div>
-    {% endfor %}
-  {% endif %}
+      {% endfor %}
+      {% endif %}
+    </div>
   </div>
-</div>
-{% endblock %}
+  {% endblock %}
