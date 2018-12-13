@@ -1,6 +1,58 @@
-{% extends 'all-pics/base.html'%}
+{%extends 'all-pics/base.html'%}
+{%load bootstrap3%}
+ {% block content %}
+<div class="container">
+       <h2>{{title}}</h2>
+       <hr>
+   </div>
 
-{% block content %}
-{{block.super}}
-<p class='text-center'>{photos for }{{date|date:"l d-F Y"}}</p> 
+   {% if photos %}
+     {% for photo in photos %}
+
+         <!-- photo -->
+         <img class="gallery-item" src="{{photo.photo.url}}" alt="{{ photo.name }}" data-toggle="modal" data-target="#a{{ photo.id }}">
+
+         <!-- Modal -->
+         <div class="modal fade" id="a{{ photo.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+               <div class="modal-content">
+                 <div class="modal-header">
+                   <h5 class="modal-title" id="exampleModalLongTitle">{{photo.name}}</h5>
+                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                   </button>
+                 </div>
+                 <div class="modal-body">
+                     <div class='photo-modal'>
+                         <img class:'img-' src="{{photo.photo.url}}" alt="{{ photo.name }}" data-toggle="modal" data-target="#exampleModalCenter">
+                     </div>
+                     <br>
+                     <div class='desc-modal'>
+                         {{photo.description}}
+                     </div>
+                     <input type="text" value="https://gallery-franco7.com{{photo.photo.url}}" id="link{{photo.id}}">
+                   </div>
+                   <div class="modal-footer">
+                     <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                     <button type="button" class="btn btn-success" onclick="copyLink({{photo.id}})">Copy Link</button>
+                 </div>
+               </div>
+             </div>
+           </div>
+     {% endfor %}
+   </div>
+   {% endif %}
+ </div>
+ <script>
+  function copyLink(id) {
+    /* Get the text field */
+    var copyText = document.getElementById("thislinkhere-" + id);
+    /* Select the text field */
+    copyText.select();
+    /* Copy the text inside the text field */
+    document.execCommand("copy");
+    /* Alert the copied text */
+    alert("Don't forget to share this link: " + copyText.value);
+  }
+</script>
 {% endblock %}
